@@ -1,0 +1,36 @@
+language: android
+sudo: required
+jdk: oraclejdk8
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+
+env:
+  global:
+  - ANDROID_API=16
+  - ANDROID_BUILD_TOOLS=16.0.1
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-$ANDROID_BUILD_TOOLS
+    - android-$ANDROID_API
+    - extra-google-m2repository
+    - extra-
+    - addon-google_apis-google-19 # google play services
+
+  licenses:
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+
+script:
+  - ./gradlew build check
+
