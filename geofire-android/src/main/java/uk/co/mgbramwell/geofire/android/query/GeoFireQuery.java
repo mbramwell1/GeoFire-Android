@@ -146,8 +146,8 @@ public class GeoFireQuery {
   public GeoFireQuery whereNearTo(QueryLocation queryLocation, Distance distance) {
     BoundingBoxUtils geoPointUtils = new BoundingBoxUtils(distance.getUnit());
     BoundingBox boundingBox = geoPointUtils.getBoundingBox(queryLocation, distance.getDistance());
-    System.out.println(boundingBox.toString());
     this.query = this.query
+        .orderBy("geoFireLocation")
         .whereGreaterThanOrEqualTo("geoFireLocation", boundingBox.getMinimumMatch())
         .whereLessThanOrEqualTo("geoFireLocation", boundingBox.getMaximumMatch());
     return this;
