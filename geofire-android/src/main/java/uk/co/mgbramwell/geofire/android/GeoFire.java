@@ -2,6 +2,7 @@ package uk.co.mgbramwell.geofire.android;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 
 import uk.co.mgbramwell.geofire.android.listeners.SetLocationListener;
@@ -12,11 +13,9 @@ import java.util.Map;
 
 public class GeoFire {
   private final CollectionReference collectionReference;
-  private GeoFireQuery firebaseFirestoreQuery;
 
   public GeoFire(CollectionReference collectionReference){
     this.collectionReference = collectionReference;
-    this.firebaseFirestoreQuery = new GeoFireQuery();
   }
 
   DocumentReference getDocumentReference(String documentID) {
@@ -34,7 +33,7 @@ public class GeoFire {
       DocumentReference docRef = this.getDocumentReference(documentId);
       double degreeMatch = (latitude+90)*180+longitude;
       Map<String, Object> updates = new HashMap();
-      updates.put("locationFirestoreLocation", degreeMatch);
+      updates.put("geoFireLocation", degreeMatch);
       docRef.set(updates, SetOptions.merge()).addOnCompleteListener(task -> {
         if (listener != null) {
           if (task.isSuccessful()) {
@@ -46,5 +45,9 @@ public class GeoFire {
 
       });
     }
+  }
+
+  public GeoFireQuery query() {
+    return new GeoFireQuery().onCollection(collectionReference);
   }
 }

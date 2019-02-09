@@ -40,4 +40,16 @@ public class BoundingBox {
   public double getMaximumMatch(){
     return maximumMatch;
   }
+
+  @Override
+  public String toString() {
+    return "BoundingBox{" +
+        "minimumLatitude=" + minimumLatitude +
+        ", minimumLongitude=" + minimumLongitude +
+        ", maximumLatitude=" + maximumLatitude +
+        ", maximumLongitude=" + maximumLongitude +
+        ", minimumMatch=" + minimumMatch +
+        ", maximumMatch=" + maximumMatch +
+        '}';
+  }
 }
