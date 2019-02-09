@@ -22,9 +22,9 @@ android:
     - platform-tools
     - build-tools-$ANDROID_BUILD_TOOLS
     - android-$ANDROID_API
+    - build-tools-27.0.3
+    - android-27
     - extra-google-m2repository
-    - extra-
-    - addon-google_apis-google-19 # google play services
 
   licenses:
     - android-sdk-preview-license-.+
