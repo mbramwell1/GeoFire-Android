@@ -33,4 +33,3 @@ android:
 
 script:
   - ./gradlew build check
-

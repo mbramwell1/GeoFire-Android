@@ -4,7 +4,7 @@ import uk.co.mgbramwell.geofire.android.model.BoundingBox;
 import uk.co.mgbramwell.geofire.android.model.DistanceUnit;
 import uk.co.mgbramwell.geofire.android.model.QueryLocation;
 
-public class GeoPointUtils {
+public class BoundingBoxUtils {
   private DistanceUnit distanceUnit;
 
   private static final double EARTH_RADIUS_KM = 6371.001;
@@ -15,7 +15,7 @@ public class GeoPointUtils {
   private static final double MINIMUM_LONGITUDE = Math.toRadians(-180d); // -PI
   private static final double MAXIMUM_LONGITUDE = Math.toRadians(180d);  //  PI
 
-  public GeoPointUtils(DistanceUnit distanceUnit) {
+  public BoundingBoxUtils(DistanceUnit distanceUnit) {
     this.distanceUnit = distanceUnit;
   }
 
