@@ -5,7 +5,7 @@ Current Pre-Production: **0.0.2**<br>
 
 _GeoFire-Android_ adds location based searching capability to the popular Google Firebase Firestore platform.
 
-##Usage
+## Usage
 GeoFire works with your exiting Firebase Firestore setup. To use it add the following line to your gradle file.
 ```
 implementation 'uk.co.mgbramwell.geofire:geofire-android:0.0.2'
