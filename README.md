@@ -11,14 +11,24 @@ GeoFire works with your exiting Firebase Firestore setup. To use it add the foll
 implementation 'uk.co.mgbramwell.geofire:geofire-android:0.0.2'
 ```
 
-You can then use GeoFire as shown below. The line .whereNearTo is the important bit, but you can use any
-other standard Firestore query language as normal:
+You'll need to set up GeoFire to use your collection:
 
 ```
 private FirebaseFirestore db = FirebaseFirestore.getInstance();
 private CollectionReference myCollection = db.collection("myCollection");
 private GeoFire geoFire = new GeoFire(myCollection);
- 
+```
+
+When saving your documents, in the onComplete listener you'll need to get GeoFire to update the document with its calculated location (you obviously need to replace the document object with whatever object you're working with):
+
+```
+geoFire.setLocation(document.getId(), document.getLatitude(), document.getLongitude());
+```
+
+You can then use GeoFire as shown below. The line .whereNearTo is the important bit, but you can use any
+other standard Firestore query language as normal:
+
+```
 QueryLocation queryLocation = QueryLocation.fromDegrees(latitude, longitude);
 Distance searchDistance = new Distance(1.0, DistanceUnit.KILOMETERS);
 geoFire.query()
