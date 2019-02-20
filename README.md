@@ -25,6 +25,17 @@ When saving your documents, in the onComplete listener you'll need to get GeoFir
 geoFire.setLocation(document.getId(), document.getLatitude(), document.getLongitude());
 ```
 
+If you want to check if the insert is successful, make your class implement SetLocationListener, and look for exceptions in the onComplete method:
+
+```
+geoFire.setLocation(document.getId(), document.getLatitude(), document.getLongitude(), this);
+
+@Override
+public void onComplete(Exception e){
+ DO_STUFF_HERE
+};
+```
+
 You can then use GeoFire as shown below. The line .whereNearTo is the important bit, but you can use any
 other standard Firestore query language as normal:
 
