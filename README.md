@@ -28,7 +28,29 @@ geoFire.setLocation(document.getId(), document.getLatitude(), document.getLongit
 If you want to check if the insert is successful, make your class implement SetLocationListener, and look for exceptions in the onComplete method:
 
 ```
-geoFire.setLocation(document.getId(), document.getLatitude(), document.getLongitude(), this);
+Map<String, Object> user = new HashMap<>();
+user.put("first", "Ada");
+user.put("last", "Lovelace");
+user.put("born", 1815);
+user.put("latitude", 123.456);
+user.put("longitude", -1.23456);
+
+// Add a new document with a generated ID
+db.collection("users")
+        .add(user)
+        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                geoFire.setLocation(documentReference.getId(), user.get("latitude"), user.get("longitude"), this);
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error adding document", e);
+            }
+        });
 
 @Override
 public void onComplete(Exception e){
